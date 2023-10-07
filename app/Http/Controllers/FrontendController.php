@@ -31,12 +31,14 @@ class FrontendController extends Controller
         // return $banner;
         $products=Product::where('status','active')->orderBy('id','DESC')->limit(8)->get();
         $category=Category::where('status','active')->where('is_parent',1)->orderBy('title','ASC')->get();
+        $product_latests=DB::table('products')->where('status','active')->orderBy('id','DESC')->limit(6)->get();
         // return $category;
-        return view('frontend.index')
+        return view('frontend.pages.index')
                 ->with('featured',$featured)
                 ->with('posts',$posts)
                 ->with('banners',$banners)
                 ->with('product_lists',$products)
+                ->with('product_latest',$product_latests)
                 ->with('category_lists',$category);
     }   
 
